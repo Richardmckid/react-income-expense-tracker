@@ -7,4 +7,5 @@ const App = () =>{
             <h1>Expense/Income Tracker</h1>
         </div>
     )
-}s
+}
+```
