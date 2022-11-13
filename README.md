@@ -4,7 +4,7 @@
 const App = () =>{
     return (
         <div>
-            <h1>Expense/Income Tracker</h1>
+            <h1>Expense/Income Tracker App</h1>
         </div>
     )
 }
