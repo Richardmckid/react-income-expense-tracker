@@ -1,4 +1,4 @@
-# react-income-expense-tracker
+# Income/Expense Tracker - ReactJS
 
 ```js
 const App = () =>{
