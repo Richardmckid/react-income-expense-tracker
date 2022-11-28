@@ -2,6 +2,7 @@
 import { Categories as Data } from '../Data'
 import styles from './categories.module.scss'
 import {MdAdd, MdDeleteOutline} from 'react-icons/md'
+import Button from './Button'
 
 const Categories = () => {
 
@@ -10,8 +11,18 @@ const Categories = () => {
     <div className={styles.container}>
 
       <h1>Categories</h1>
+      <div className={styles.form_wrapper}>
 
-      <div>
+        <form>
+          <div>
+            <label>Category</label>
+            <input type="text"/>
+          </div>
+          <Button>Add New Category</Button>
+        </form>
+      </div>
+
+      <div className={styles.categories}>
 
         {
 
@@ -23,7 +34,6 @@ const Categories = () => {
 
                 <h4>{category.label}</h4>
 
-                <small>BWP 5007.90</small>
                 <MdDeleteOutline onClick={(e) => console.log(e)} className={styles.delete_btn}/>
               </div>
 
@@ -33,7 +43,7 @@ const Categories = () => {
 
         }
 
-        <button><MdAdd/>Add New</button>
+        
 
       </div>
 
