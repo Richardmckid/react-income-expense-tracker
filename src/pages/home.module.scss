@@ -3,9 +3,17 @@
     h1{
 
     }
-    .createForm{
+    .createSection{
+        display: flex;
+        flex-direction: column;
 
-        // width: 30%;
+        :nth-child(1){
+            align-self: flex-end;
+        }
        
+    }
+
+    .transactionsWrapper{
+        
     }
 }

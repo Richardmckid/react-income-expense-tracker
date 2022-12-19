@@ -5,7 +5,7 @@ const SelectInput = ({onChange, value, options, ...rest}) => {
     <select value={value} onChange={onChange}>
         {
             options.map(item => (
-                <option key={item.label} value={item.value}>{item.label}</option>
+                <option key={item.label} value={item.id}>{item.label}</option>
             ))
         }
     </select>

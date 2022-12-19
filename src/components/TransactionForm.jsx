@@ -14,23 +14,28 @@ import TextInput from '../components/misc/TextInput'
 import { Categories } from '../Data'
 import './transactionform.module.scss'
 
+
+// state
+import { useSelector, useDispatch } from 'react-redux';
+import { closeModal } from '../store/features/modalSlice';
+
+
 const TransactionForm = () => {
+
+    const categories = useSelector((state) => state.categories.value)
+  
+    const dispatch = useDispatch()
 
     const handleSave = (e) => {
         e.preventDefault();
         console.log(e)
     }
 
-    const handleClose = (e) => {
-        e.preventDefault();
-        console.log(e)
-    }
 
     const [selectedCat, setSelectedCat] = useState(undefined)
     const [date, setDate] = useState(new Date())
     return (
-        <div className="overlay">
-            
+        <div className="overlay">         
 
             <form>
                 <TextInput
@@ -46,7 +51,7 @@ const TransactionForm = () => {
                 <SelectInput
                 onChange={e => setSelectedCat(e.target.value)}
                 value={selectedCat}
-                options={Categories}
+                options={categories}
                 />
 
                 <Button
@@ -62,7 +67,7 @@ const TransactionForm = () => {
                     }}
                 />
                 <Button
-                    onClick={handleClose}
+                    onClick={() => dispatch(closeModal())}
                     children={'Close'}
                     className='btn-secondary'
                     // disabled = {true}
