@@ -1,5 +1,5 @@
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
-import './App.scss'
+import './App.css'
 
 // Pages
 import Home from './pages/Home'
