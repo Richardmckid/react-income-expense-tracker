@@ -1,5 +1,5 @@
 // core
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 // contrib
 import { v4 as uuidv4 } from 'uuid';
@@ -11,11 +11,20 @@ import Button from './misc/Button'
 import classes from './categories.module.scss'
 import TextInput from './misc/TextInput'
 
-import {Categories as Data} from '../Data'
+// state
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteCategory, getCategoriesFromLocalStorage, addNewCategory } from '../store/features/categorySlice'
 
 const Categories = () => {
 
-  const [data, setData] = useState(Data)
+  const dispatch = useDispatch()
+
+  const data = useSelector((state) => state.categories.value)
+
+  useEffect(() => {
+    dispatch(getCategoriesFromLocalStorage())
+  },[])
+
 
   const [text, setText] = useState('')
 
@@ -32,17 +41,11 @@ const Categories = () => {
     let category = data.find(item => item.label === newCat.label)
     if(category) return alert(`${text} already exists`);
 
-    let updated = [newCat, ...data]
-    setData(updated)
+    dispatch(addNewCategory(newCat))
     setText('')
   }
 
-  const handleDelete = (id) => {
-
-    let updated = data.filter(item => item.id !== id)
-    setData(updated)
-
-  }
+ 
   return (
     <aside className={classes.categoriesWrapper}>
       <h2>CATEGORIES</h2>
@@ -67,7 +70,7 @@ const Categories = () => {
           data.map(item => (
             <li key={item.id}>
               <span>{item.label}</span>
-              <MdDelete onClick={() => handleDelete(item.id)} className={classes.DelIcon}/>
+              <MdDelete onClick={() => dispatch(deleteCategory(item.id))} className={classes.DelIcon}/>
             </li>
           ))
         }

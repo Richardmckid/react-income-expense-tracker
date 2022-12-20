@@ -1,28 +1,53 @@
 // core
 import { useState } from 'react'
 
-
 // contrib
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-
+import { AiOutlinePlus } from 'react-icons/ai'
 
 // custom
-import SelectInput from '../components/misc/SelectInput'
-import TextInput from '../components/misc/TextInput'
 import classes from './home.module.scss'
-import { Categories } from '../Data'
 import TransactionForm from '../components/TransactionForm';
+import Button from '../components/misc/Button';
+import Transactions from '../components/Transactions';
+
+// state
+import { useSelector, useDispatch } from 'react-redux';
+import { openModal } from '../store/features/modalSlice';
 
 const Home = () => {
 
-  const [selectedCat, setSelectedCat] = useState(null)
-  const [date, setDate] = useState(new Date())
+  const showModal = useSelector((state) => state.modal.isOpen)
+  
+  const dispatch = useDispatch()
+
+  const handleOpenCreateFrom = () => {
+    
+
+
+  }
   return (
     <section className={classes.homeWrapper}>
       <h1>Transactions</h1>
-      <div className="pos-abs">
-       <TransactionForm/>
+      <div className={classes.createSection}>
+        <Button
+          onClick={() => dispatch(openModal())}
+          children={'Create New'}
+          icon = {<AiOutlinePlus/>}
+          // className='btn-primary btn-sm'
+          style={{
+            fontSize: '18px',
+            // fontWeight: 800
+            display: 'flex',
+            justifyContent: 'space-between',
+            width: '200px',
+            border: '1px solid rgb(0, 85, 255)'
+          }}
+        />
+       { showModal && <TransactionForm/> }
+      </div>
+
+      <div className={classes.transactionsWrapper}>
+        <Transactions/>
       </div>
     </section>
   )
