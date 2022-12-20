@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    value: []
+    value: [],
+    editItem: undefined
 }
 
 export const transactionSlice = createSlice({
@@ -17,17 +18,30 @@ export const transactionSlice = createSlice({
         },
 
         editTransaction: (state, action) =>{
-            let transaction = state.value.find(item => item.id === action.payload.id)
-            // { id: 1, label: 'Payment', date: '23/09/2022', amount: 10600.00, category: 1},
-            let test = state.value.map(item => {
-                if(item.id === action.payload.id){
+
+            let updated = state.value.map(item => {
+                if(item.id == action.payload.id){
                     return {...item, label: action.payload.label, date: action.payload.date, amount: action.payload.amount, category: action.payload.category}
                 }
                 return item
             })
-            // state.value = categories
-            // localStorage.setItem('categories', JSON.stringify(state.value))
-            console.log(test)
+         
+            state.value = updated
+            localStorage.setItem('transactions', JSON.stringify(state.value))
+            console.log(updated)
+           
+        },
+
+        editQueue: (state, action) =>{
+            let transaction = state.value.find(item => item.id === action.payload)
+            console.log(transaction)
+            // transaction.date = new Date(transaction.date)
+            state.editItem = transaction
+            
+        },
+
+        clearEditQueue:(state) => {
+            state.editItem = undefined
         },
 
         addNewTransaction: (state, action) =>{
@@ -38,6 +52,6 @@ export const transactionSlice = createSlice({
     }
 })
 
-export const { getTransactionFromLocalStorage, editTransaction, addNewTransaction } = transactionSlice.actions
+export const { getTransactionFromLocalStorage, editTransaction, addNewTransaction, editQueue, clearEditQueue } = transactionSlice.actions
 
 export default transactionSlice.reducer

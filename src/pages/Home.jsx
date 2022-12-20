@@ -1,18 +1,14 @@
 // core
 import { useState } from 'react'
 
-
 // contrib
 import { AiOutlinePlus } from 'react-icons/ai'
 
 // custom
-
 import classes from './home.module.scss'
-import { Categories } from '../Data'
 import TransactionForm from '../components/TransactionForm';
 import Button from '../components/misc/Button';
 import Transactions from '../components/Transactions';
-
 
 // state
 import { useSelector, useDispatch } from 'react-redux';
